@@ -1,23 +1,23 @@
 const pubsub = {
   events: {},
-  subscribe: function (evName, fn) {
-    console.log(`PUBSUB: someone just subscribed to know about ${evName}`);
+  subscribe: function (eventName, fn) {
+    console.log(`PUBSUB: someone just subscribed to know about ${eventName}`);
     //add an event with a name as new or to existing list
-    this.events[evName] = this.events[evName] || [];
-    this.events[evName].push(fn);
+    this.events[eventName] = this.events[eventName] || [];
+    this.events[eventName].push(fn);
   },
-  unsubscribe: function (evName, fn) {
-    console.log(`PUBSUB: someone just UNsubscribed from ${evName}`);
+  unsubscribe: function (eventName, fn) {
+    console.log(`PUBSUB: someone just UNsubscribed from ${eventName}`);
     //remove an event function by name
-    if (this.events[evName]) {
-      this.events[evName] = this.events[evName].filter(f => f !== fn);
+    if (this.events[eventName]) {
+      this.events[eventName] = this.events[eventName].filter(f => f !== fn);
     }
   },
-  publish: function (evName, data) {
-    console.log(`PUBSUB: Making an broadcast about ${evName} with ${data}`);
+  publish: function (eventName, data) {
+    console.log(`PUBSUB: Making an broadcast about ${eventName} with ${data}`);
     //emit|publish|announce the event to anyone who is subscribed
-    if (this.events[evName]) {
-      this.events[evName].forEach(f => {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach(f => {
         f(data);
       });
     }
